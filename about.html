@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us – HealthyEats</title>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #2F855A;
+      --secondary: #27694a;
+      --text: #333;
+      --bg: #F7FAFC;
+      --card-bg: #fff;
+      --border: #eee;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Open Sans', sans-serif; background: var(--bg); color: var(--text); }
+    header { background: var(--card-bg); padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); position: sticky; top: 0; }
+    .logo { font-family: 'Poppins', sans-serif; font-size: 1.5rem; color: var(--primary); text-decoration: none; }
+    nav ul { display: flex; list-style: none; gap: 1.5rem; }
+    nav a { text-decoration: none; color: var(--text); font-weight: 500; }
+    nav a:hover { color: var(--primary); }
+    main { padding: 3rem 2rem; max-width: 1000px; margin: auto; }
+    h1 { font-family: 'Poppins', sans-serif; font-size: 2rem; margin-bottom: 1.5rem; text-align: center; }
+    p { font-size: 1.05rem; line-height: 1.7; margin-bottom: 1.5rem; }
+    .highlight-list { margin-top: 2rem; margin-bottom: 2rem; }
+    .highlight-list li { margin-bottom: 1rem; font-size: 1rem; }
+    .image-grid { display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); margin-top: 2rem; }
+    .image-grid img { width: 100%; border-radius: 0.5rem; object-fit: cover; height: 220px; }
+    .section-heading { font-family: 'Poppins', sans-serif; font-size: 1.5rem; margin-top: 3rem; text-align: center; margin-bottom: 1rem; }
+    .banner { margin-top: 3rem; position: relative; }
+    .banner img { width: 100%; height: 300px; object-fit: cover; border-radius: 0.5rem; }
+    .banner-text { position: absolute; bottom: 20px; left: 20px; color: white; font-size: 1.5rem; font-family: 'Poppins', sans-serif; background: rgba(0,0,0,0.5); padding: 0.5rem 1rem; border-radius: 0.3rem; }
+    footer { text-align: center; padding: 2rem; font-size: 0.85rem; color: #777; }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="index.html" class="logo">HealthyEats</a>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="recipes.html">Recipes</a></li>
+        <li><a href="mealplan.html?type=veg">Meal Plans</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="cart.html">Cart</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <h1>🥦 About Us – Fueling Your Life, One Healthy Meal at a Time</h1>
+    <p>At <strong>HealthyEats</strong>, we believe that good food fuels great lives.</p>
+    <p>Born from the need for quick, nutritious, and affordable meals for students and working professionals, we crafted a platform that makes healthy eating not just simple—but sustainable. Whether you’re rushing between classes, juggling meetings, or hitting the gym, we’re here to support your goals with wholesome, pre-planned recipes and customizable meal plans.</p>
+    <p>Our mission is simple: Make healthy eating easy, accessible, and enjoyable for everyone.</p>
+    <p>We blend nutrition science with culinary creativity, offering vegetarian and non-vegetarian plans for muscle gain, weight loss, and all-round wellness—without compromising on taste or time.</p>
+
+    <h2 class="section-heading">What Makes Us Different?</h2>
+    <ul class="highlight-list">
+      <li>✅ Time-saving menus & grocery lists tailored to your goals</li>
+      <li>✅ Dietician-backed meal plans with macro-balanced recipes</li>
+      <li>✅ Visual PDFs for each plan with easy-to-follow meals</li>
+      <li>✅ A vibrant recipe blog that grows with your lifestyle</li>
+    </ul>
+    <p>We’re not just a website—we’re your everyday partner in health.</p>
+    <p><strong>Let’s make food your best habit.</strong></p>
+
+    <div class="image-grid">
+      <img src="nutritious breakfast.png" alt="Weekly meal prep with colorful food containers">
+      <img src="shake and oats.png" alt="Nutritious breakfast smoothie and oats with fruits">
+      <img src="group.png" alt="Group of friends eating healthy food at dinner table">
+    </div>
+
+    
+  </main>
+  <footer>
+    &copy; 2025 HealthyEats. All rights reserved.
+  </footer>
+</body>
+</html>

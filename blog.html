@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Blog – HealthyEats</title>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --primary: #2F855A;
+      --text: #333;
+      --bg: #F7FAFC;
+      --card-bg: #fff;
+      --border: #eee;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Open Sans', sans-serif; background: var(--bg); color: var(--text); }
+    header { background: var(--card-bg); padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; }
+    .logo { font-family: 'Poppins', sans-serif; font-size: 1.5rem; color: var(--primary); text-decoration: none; }
+    nav ul { display: flex; list-style: none; gap: 1rem; }
+    nav a { text-decoration: none; color: var(--text); font-weight: 500; }
+    nav a:hover { color: var(--primary); }
+    main { padding: 2rem; max-width: 1100px; margin: auto; }
+    h1 { font-family: 'Poppins', sans-serif; font-size: 2rem; text-align: center; margin-bottom: 2rem; }
+    .blog-grid { display: grid; gap: 2rem; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+    .blog-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 0.5rem; overflow: hidden; transition: transform 0.2s ease; display: flex; flex-direction: column; }
+    .blog-card:hover { transform: translateY(-5px); }
+    .blog-img { width: 100%; height: 180px; object-fit: cover; }
+    .blog-content { padding: 1rem; flex: 1; display: flex; flex-direction: column; }
+    .blog-title { font-family: 'Poppins', sans-serif; font-size: 1.2rem; margin-bottom: 0.5rem; color: var(--primary); }
+    .blog-snippet { font-size: 0.95rem; flex: 1; margin-bottom: 1rem; }
+    .read-more { text-decoration: none; font-weight: 600; color: var(--primary); font-size: 0.95rem; }
+    footer { text-align: center; padding: 2rem; font-size: 0.85rem; color: #777; }
+  </style>
+</head>
+<body>
+<header>
+  <a href="index.html" class="logo">HealthyEats</a>
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="recipes.html">Recipes</a></li>
+      <li><a href="mealplan.html">Meal Plans</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="cart.html">Cart</a></li>
+    </ul>
+  </nav>
+</header>
+<main>
+  <h1>🥗 HealthyEats Blog</h1>
+  <div class="blog-grid">
+    <div class="blog-card">
+      <img src="10 meals 15.jpg" alt="Quick Meals" class="blog-img" />
+      <div class="blog-content">
+        <div class="blog-title">10 Quick Meals Under 15 Minutes</div>
+        <div class="blog-snippet">Don’t have time to cook? Here are 10 super easy meals you can whip up in under 15 minutes—without compromising on nutrition.</div>
+        <a class="read-more" href="https://www.recipetineats.com/category/collections/quick-dinner-ideas-15-minute-meals/">Read More →</a>
+      </div>
+    </div>
+    <div class="blog-card">
+      <img src="budget food.jpg" alt="Budget Recipes" class="blog-img" />
+      <div class="blog-content">
+        <div class="blog-title">Healthy Eating on a Budget</div>
+        <div class="blog-snippet">Smart shopping tips and affordable recipes tailored for students and professionals. Stay fit without burning your wallet!</div>
+        <a class="read-more" href="https://www.eatforhealth.gov.au/eating-well/tips-eating-well/healthy-eating-budget">Read More →</a>
+      </div>
+    </div>
+    <div class="blog-card">
+      <img src="how-to-meal-plan.jpg" alt="Meal Planning" class="blog-img" />
+      <div class="blog-content">
+        <div class="blog-title">How Meal Planning Saves Time & Money</div>
+        <div class="blog-snippet">Learn how structured meal plans can simplify your grocery shopping, reduce food waste, and improve daily nutrition.</div>
+        <a class="read-more" href="https://simonejonestyner.com/how-meal-planning-saves-you-time-and-money/">Read More →</a>
+      </div>
+    </div>
+  </div>
+</main>
+<footer>
+  &copy; 2025 HealthyEats. All rights reserved.
+</footer>
+</body>
+</html>

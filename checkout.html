@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Checkout – HealthyEats</title>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root { --primary:#2F855A; --text:#333; --bg:#F7FAFC; --card-bg:#fff; --border:#eee; }
+    * { box-sizing:border-box; margin:0; padding:0; }
+    body { font-family:'Open Sans',sans-serif; background:var(--bg); color:var(--text); }
+    header { background:var(--card-bg); padding:1rem 2rem; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border); position:sticky; top:0; }
+    .logo { font-family:'Poppins',sans-serif; font-size:1.5rem; color:var(--primary); text-decoration:none; }
+    nav ul { display:flex; list-style:none; gap:1rem; }
+    nav a { text-decoration:none; color:var(--text); font-weight:500; }
+    main { max-width:600px; margin:2rem auto; background:var(--card-bg); padding:2rem; border-radius:0.5rem; box-shadow:0 2px 4px rgba(0,0,0,0.1); }
+    h1 { font-family:'Poppins',sans-serif; font-size:1.8rem; text-align:center; margin-bottom:1.5rem; }
+    .cart-summary { margin-bottom:2rem; }
+    .cart-item { display:flex; justify-content:space-between; padding:0.75rem 1rem; border:1px solid var(--border); border-radius:0.5rem; background:var(--bg); margin-bottom:0.5rem; }
+    .item-info { text-align:left; }
+    .item-name { font-weight:600; }
+    .item-details { font-size:0.9rem; color:#555; }
+    form { display:flex; flex-direction:column; gap:1rem; }
+    label { font-weight:600; }
+    input, textarea { padding:0.5rem; border:1px solid var(--border); border-radius:0.25rem; font-size:1rem; width:100%; }
+    .payment-options { display:flex; gap:1rem; }
+    .qr-code { display:none; margin:1rem auto; max-width:200px; }
+    .submit-btn { padding:0.75rem; background:var(--primary); color:#fff; border:none; border-radius:0.5rem; font-size:1rem; cursor:pointer; transition:background .3s; }
+    .submit-btn:hover { background:#27694a; }
+    footer { text-align:center; padding:1rem; font-size:0.85rem; color:#777; margin-top:2rem; }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="index.html" class="logo">HealthyEats</a>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="recipes.html">Recipes</a></li>
+        <li><a href="mealplan.html">Meal Plans</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="cart.html">Cart</a></li>
+        <li><a href="blog.html">Blog</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Checkout</h1>
+
+    <!-- Cart Summary -->
+    <div class="cart-summary" id="cart-summary">
+      <h2>Your Selected Plans</h2>
+    </div>
+
+    <!-- Payment Form -->
+    <form id="checkout-form">
+      <div>
+        <label for="name">Full Name</label>
+        <input type="text" id="name" name="name" required>
+      </div>
+      <div>
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" required placeholder="10-digit number">
+      </div>
+      <div>
+        <label for="address">Address</label>
+        <textarea id="address" name="address" rows="3" required></textarea>
+      </div>
+      <div>
+        <label>Payment Mode</label>
+        <div class="payment-options">
+          <label><input type="radio" name="payment" value="card" required> Card</label>
+          <label><input type="radio" name="payment" value="cod"> Cash on Delivery</label>
+          <label><input type="radio" name="payment" value="upi"> UPI</label>
+        </div>
+      </div>
+      <div id="card-details" style="display:none;">
+        <div>
+          <label for="cardnum">Card Number</label>
+          <input type="text" id="cardnum" maxlength="16" placeholder="1234 5678 9012 3456">
+        </div>
+        <div>
+          <label for="expiry">Expiry (MM/YY)</label>
+          <input type="text" id="expiry" maxlength="5" placeholder="MM/YY">
+        </div>
+        <div>
+          <label for="cvv">CVV</label>
+          <input type="password" id="cvv" maxlength="3" placeholder="123">
+        </div>
+      </div>
+      <img src="qr.jpeg" alt="Scan UPI QR" id="upi-qr" class="qr-code">
+      <button type="submit" class="submit-btn">Place Order</button>
+    </form>
+  </main>
+
+  <footer>&copy; 2025 HealthyEats. All rights reserved.</footer>
+
+  <script>
+    // Render cart summary
+    const summary = document.getElementById('cart-summary');
+    const savedCart = JSON.parse(localStorage.getItem('cart')||'[]');
+    if (!savedCart.length) {
+      summary.innerHTML += '<p>No items in cart.</p>';
+    } else {
+      savedCart.forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'cart-item';
+        div.innerHTML = `
+          <div class="item-info">
+            <div class="item-name">${item.goal} – ${item.name}</div>
+            <div class="item-details">Type: ${item.type.toUpperCase()}, Price: ${item.price}</div>
+          </div>
+        `;
+        summary.appendChild(div);
+      });
+    }
+
+    // Toggle payment fields
+    const form = document.getElementById('checkout-form');
+    const cardDetails = document.getElementById('card-details');
+    const upiQr = document.getElementById('upi-qr');
+    form.payment.forEach(radio => {
+      radio.addEventListener('change', () => {
+        cardDetails.style.display = radio.value==='card'?'block':'none';
+        upiQr.style.display = radio.value==='upi'?'block':'none';
+      });
+    });
+
+    // Form submission
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      alert('Order placed!');
+      localStorage.removeItem('cart');
+      window.location.href = 'index.html';
+    });
+  </script>
+</body>
+</html>

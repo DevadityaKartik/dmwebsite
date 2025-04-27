@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Your Cart – HealthyEats</title>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root { --primary:#2F855A; --text:#333; --bg:#F7FAFC; --card-bg:#fff; --border:#eee; }
+    * { box-sizing:border-box; margin:0; padding:0; }
+    body { font-family:'Open Sans',sans-serif; background:var(--bg); color:var(--text); }
+    header { background:var(--card-bg); padding:1rem 2rem; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border); position:sticky; top:0; }
+    .logo { font-family:'Poppins',sans-serif; font-size:1.5rem; color:var(--primary); text-decoration:none; }
+    nav ul { display:flex; list-style:none; gap:1rem; }
+    nav a { text-decoration:none; color:var(--text); font-weight:500; }
+    main { padding:2rem; max-width:800px; margin:auto; }
+    h1 { font-family:'Poppins',sans-serif; font-size:2rem; margin-bottom:1rem; text-align:center; }
+    .cart-list { list-style:none; margin-top:1.5rem; }
+    .cart-item { background:var(--card-bg); border:1px solid var(--border); border-radius:0.5rem; padding:1rem; margin-bottom:1rem; display:flex; justify-content:space-between; align-items:center; }
+    .item-info { text-align:left; }
+    .item-name { font-family:'Poppins',sans-serif; font-size:1.1rem; font-weight:600; }
+    .item-details { font-size:0.95rem; color:#555; }
+    .remove-btn { background:#E53E3E; color:#fff; border:none; border-radius:0.25rem; padding:0.5rem 1rem; cursor:pointer; transition:background .2s; }
+    .remove-btn:hover { background:#C53030; }
+    .goto-payment { display:block; background:var(--primary); color:#fff; border:none; border-radius:0.5rem; padding:0.75rem 1.5rem; font-family:'Poppins',sans-serif; font-size:1rem; cursor:pointer; margin:2rem auto 0; text-decoration:none; text-align:center; transition:background .3s; }
+    .goto-payment:hover { background:#27694a; }
+    footer { text-align:center; padding:1rem; font-size:0.85rem; color:#777; }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="index.html" class="logo">HealthyEats</a>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="recipes.html">Recipes</a></li>
+        <li><a href="mealplan.html">Meal Plans</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="cart.html">Cart</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Your Cart</h1>
+    <ul class="cart-list" id="cart-list"></ul>
+    <a href="checkout.html" class="goto-payment">Go to Payment</a>
+  </main>
+
+  <footer>&copy; 2025 HealthyEats. All rights reserved.</footer>
+
+  <script>
+    let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+    const list = document.getElementById('cart-list');
+    const goBtn = document.querySelector('.goto-payment');
+    if (cart.length === 0) {
+      list.innerHTML = '<p>Your cart is empty.</p>';
+      goBtn.style.display = 'none';
+    } else {
+      list.innerHTML = cart.map((item,i) => `
+        <li class="cart-item">
+          <div class="item-info">
+            <div class="item-name">${item.goal} – ${item.name}</div>
+            <div class="item-details">Type: ${item.type.toUpperCase()}, Price: ${item.price}</div>
+          </div>
+          <button class="remove-btn" data-index="${i}">Remove</button>
+        </li>
+      `).join('');
+    }
+    document.body.addEventListener('click', e => {
+      if (e.target.classList.contains('remove-btn')) {
+        const idx = e.target.dataset.index;
+        cart.splice(idx,1);
+        localStorage.setItem('cart', JSON.stringify(cart));
+        location.reload();
+      }
+    });
+  </script>
+</body>
+</html>

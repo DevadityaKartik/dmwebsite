@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recipes – HealthyEats</title>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #2F855A;
+      --secondary: #F5F5DC;
+      --text: #333333;
+      --card-bg: #fff;
+      --card-border: #eee;
+      --accent: #A0AEC0;
+      --btn-active: #27694a;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: 'Open Sans', sans-serif; color: var(--text); line-height: 1.6; background: #F7FAFC; }
+    header { background: white; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--card-border); position: sticky; top:0; z-index:100; }
+    .logo { font-family: 'Poppins', sans-serif; font-size:1.5rem; color:var(--primary); text-decoration:none; }
+    nav ul { list-style:none; display:flex; gap:1rem; margin:0; padding:0; }
+    nav a { text-decoration:none; color:var(--text); font-weight:500; }
+
+    /* Filter Panel */
+    .filters { background:white; padding:1.5rem 2rem; display:flex; flex-wrap:wrap; gap:1rem; align-items:center; }
+    .filter-group { display:flex; align-items:center; gap:0.5rem; }
+    .filter-group label { font-weight:600; }
+    .btn-toggle { padding:0.5rem 1rem; border:1px solid var(--accent); border-radius:0.5rem; background:white; color:var(--text); cursor:pointer; transition:background 0.3s, color 0.3s; }
+    .btn-toggle.active { background:var(--primary); color:white; border-color:var(--primary); }
+    .select-time { padding:0.5rem; border:1px solid var(--accent); border-radius:0.5rem; background:white; }
+    .btn-done { margin-left:auto; padding:0.6rem 1.2rem; background:var(--primary); color:white; border:none; border-radius:0.5rem; cursor:pointer; }
+    .btn-done:hover { background:var(--btn-active); }
+
+    /* Recipes Grid */
+    .recipes-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1.5rem; padding:2rem; }
+    .recipe-card { background:var(--card-bg); border:1px solid var(--card-border); border-radius:0.5rem; overflow:hidden; transition:transform 0.2s; }
+    .recipe-card.hide { display:none; }
+    .recipe-card:hover { transform:translateY(-4px); }
+    .recipe-image { width:100%; height:160px; object-fit:cover; }
+    .recipe-content { padding:1rem; }
+    .recipe-title { font-family:'Poppins',sans-serif; font-size:1.2rem; margin:0 0 0.5rem; }
+    .recipe-meta { font-size:0.85rem; color:#666; margin-bottom:0.8rem; }
+    .recipe-footer { display:flex; justify-content:space-between; align-items:center; }
+    .toggle-btn { background:none; border:none; color:var(--primary); font-weight:600; cursor:pointer; }
+    .toggle-btn:hover { text-decoration:underline; }
+    .details { display:none; padding:0 1rem 1rem; background:#F1F5F9; }
+    .details.open { display:block; }
+    .details p { margin:0.5rem 0; font-size:0.9rem; }
+
+    footer { text-align:center; padding:1rem 0; font-size:0.8rem; color:#888; }
+
+    @media (max-width: 600px) { .filters { flex-direction:column; align-items:stretch; } }
+  </style>
+</head>
+<body>
+<header>
+  <a href="index.html" class="logo">HealthyEats</a>
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="recipes.html">Recipes</a></li>
+      <li><a href="mealplan.html">Meal Plans</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="cart.html">Cart</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section class="filters">
+  <div class="filter-group">
+    <label>Type:</label>
+    <button class="btn-toggle active" data-type="veg">Veg</button>
+    <button class="btn-toggle active" data-type="non-veg">Non‑Veg</button>
+  </div>
+  <div class="filter-group">
+    <label for="time-select">Prep Time:</label>
+    <select id="time-select" class="select-time">
+      <option value="any">Any</option>
+      <option value="15">Under 15 min</option>
+      <option value="30">Under 30 min</option>
+    </select>
+  </div>
+  <button class="btn-done">Done</button>
+</section>
+
+<main class="recipes-grid">
+  <!-- Sprout Salad Bowl -->
+  <div class="recipe-card" data-type="veg" data-time="10">
+    <img src="sprouts.jpeg" alt="Sprout Salad Bowl" class="recipe-image">
+    <div class="recipe-content">
+      <h3 class="recipe-title">🥗 Sprout Salad Bowl</h3>
+      <div class="recipe-meta">Prep: 10m</div>
+      <div class="recipe-footer">
+        <button class="toggle-btn">View Recipe</button>
+        
+      </div>
+    </div>
+    <div class="details">
+      <p><strong>Ingredients:</strong> Boiled moong sprouts, chopped cucumber, tomato, onion; lemon juice, salt, pepper, chaat masala; coriander leaves.</p>
+      <p><strong>Instructions:</strong> Mix everything in a bowl. Squeeze lemon and sprinkle spices.</p>
+      <p><strong>Health Boost:</strong> High in protein, fiber & vitamins.</p>
+    </div>
+  </div>
+  <!-- Vegetable Upma -->
+  <div class="recipe-card" data-type="veg" data-time="15">
+    <img src="upmna.jpeg" alt="Vegetable Upma" class="recipe-image">
+    <div class="recipe-content">
+      <h3 class="recipe-title">🍜 Vegetable Upma</h3>
+      <div class="recipe-meta">Prep: 15m</div>
+      <div class="recipe-footer">
+        <button class="toggle-btn">View Recipe</button>
+        
+      </div>
+    </div>
+    <div class="details">
+      <p><strong>Ingredients:</strong> Semolina, mustard seeds, curry leaves, green chilies; chopped carrot, peas, beans; water, salt, ghee/oil.</p>
+      <p><strong>Instructions:</strong> Roast semolina; sauté mustard, curry leaves, chilies, veggies; add water & salt, mix semolina, stir until cooked.</p>
+      <p><strong>Health Boost:</strong> Great source of carbs and fiber.</p>
+    </div>
+  </div>
+  <!-- Paneer Veg Wrap -->
+  <div class="recipe-card" data-type="veg" data-time="12">
+    <img src="panner wrap.jpeg" alt="Paneer Veg Wrap" class="recipe-image">
+    <div class="recipe-content">
+      <h3 class="recipe-title">🌯 Paneer Veg Wrap</h3>
+      <div class="recipe-meta">Prep: 12m</div>
+      <div class="recipe-footer">
+        <button class="toggle-btn">View Recipe</button>
+        
+      </div>
+    </div>
+    <div class="details">
+      <p><strong>Ingredients:</strong> Whole wheat roti/tortilla, sautéed paneer cubes, sliced capsicum, onion, tomato; yogurt-mint chutney; salt, pepper, paprika.</p>
+      <p><strong>Instructions:</strong> Spread chutney on roti, layer paneer and veggies, roll tightly.</p>
+      <p><strong>Health Boost:</strong> Balanced protein, fiber, and healthy fats.</p>
+    </div>
+  </div>
+  <!-- Vegetable Stir-Fry -->
+  <div class="recipe-card" data-type="veg" data-time="30">
+    <img src="stir rice.jpeg" alt="Vegetable Stir-Fry with Brown Rice" class="recipe-image">
+    <div class="recipe-content">
+      <h3 class="recipe-title">🥘 Vegetable Stir-Fry with Brown Rice</h3>
+      <div class="recipe-meta">Cook: 30m</div>
+      <div class="recipe-footer">
+        <button class="toggle-btn">View Recipe</button>
+        
+      </div>
+    </div>
+    <div class="details">
+      <p><strong>Ingredients:</strong> Bell peppers, broccoli, carrots, beans, garlic, soy sauce, olive oil, brown rice, tofu.</p>
+      <p><strong>Instructions:</strong> Boil rice; stir-fry garlic, veggies, tofu; add soy sauce and lemon juice; serve over rice.</p>
+      <p><strong>Health Boost:</strong> High in fiber and plant protein.</p>
+    </div>
+  </div>
+  <!-- Oats Khichdi -->
+  <div class="recipe-card" data-type="veg" data-time="25">
+    <img src="oats vegetable kichdi.jpeg" alt="Oats Vegetable Khichdi" class="recipe-image">
+    <div class="recipe-content">
+      <h3 class="recipe-title">🥣 Oats Vegetable Khichdi</h3>
+      <div class="recipe-meta">Cook: 25m</div>
+      <div class="recipe-footer">
+        <button class="toggle-btn">View Recipe</button>
+        
+      </div>
+    </div>
+    <div class="details">
+      <p><strong>Ingredients:</strong> Rolled oats, moong dal, carrot, beans, peas, cumin, ginger, turmeric, ghee/oil.</p>
+      <p><strong>Instructions:</strong> Roast oats; sauté spices and dal; add veggies and water; cook; add oats, simmer.</p>
+      <p><strong>Health Boost:</strong> Rich in fiber, iron, and protein.</p>
+    </div>
+  </div>
+  <!-- Chickpea Curry -->
+  <div class="recipe-card" data-type="veg" data-time="30">
+    <img src="chick pea.jpeg" alt="Chickpea & Spinach Curry" class="recipe-image">
+    <div class="recipe-content">
+      <h3 class="recipe-title">🫓 Chickpea & Spinach Curry with Phulka</h3>
+      <div class="recipe-meta">Cook: 30m</div>
+      <div class="recipe-footer">
+        <button class="toggle-btn">View Recipe</button>
+        
+      </div>
+    </div>
+    <div class="details">
+      <p><strong>Ingredients:</strong> Boiled chickpeas, spinach, onion, tomato, garlic, cumin, garam masala, chawla dough.</p>
+      <p><strong>Instructions:</strong> Sauté aromatics; add spinach and chickpeas; cook; roll and cook phulkas.</p>
+      <p><strong>Health Boost:</strong> High in protein and iron.</p>
+    </div>
+  </div>
+  <!-- Grilled Chicken Tikka -->
+  <div class="recipe-card" data-type="non-veg" data-time="15">
+    <img src="tika bites.jpeg" alt="Grilled Chicken Tikka Bites" class="recipe-image">
+    <div class="recipe-content">
+      <h3 class="recipe-title">🍗 Grilled Chicken Tikka Bites</h3>
+      <div class="recipe-meta">Prep: 15m</div>
+      <div class="recipe-footer">
+        <button class="toggle-btn">View Recipe</button>
+        
+      </div>
+    </div>
+    <div class="details">
+      <p><strong>Ingredients:</strong> Chicken cubes, hung curd, ginger-garlic paste, lemon juice, spices, olive oil.</p>
+      <p><strong>Instructions:</strong> Marinate chicken; grill; squeeze lemon; serve.</p>
+      <p><strong>Health Boost:</strong> High-protein, low-fat.</p>
+    </div>
+  </div>
+  <!-- Masala Egg Bhurji -->
+  <div class="recipe-card" data-type="non-veg" data-time="10">
+    <img src="egg burji.jpeg" alt="Masala Egg Bhurji" class="recipe-image">
+    <div class="recipe-content">
+      <h3 class="recipe-title">🥚 Masala Egg Bhurji</h3>
+      <div class="recipe-meta">Prep: 10m</div>
+      <div class="recipe-footer">
+        <button class="toggle-btn">View Recipe</button>
+        
+      </div>
+    </div>
+    <div class="details">
+      <p><strong>Ingredients:</strong> Eggs, onion, tomato, chili, spices, ghee, coriander.</p>
+      <p><strong>Instructions:</strong> Sauté veggies and spices; add eggs; scramble; garnish.
+      </p>
+      <p><strong>Health Boost:</strong> Rich in protein and healthy fats.</p>
+    </div>
+  </div>
+  <!-- Tuna Salad Wrap -->
+  <div class="recipe-card" data-type="non-veg" data-time="12">
+    <img src="tuna wrap.jpeg" alt="Tuna Salad Wrap" class="recipe-image">
+    <div class="recipe-content">
+      <h3 class="recipe-title">🐟 Tuna Salad Wrap</h3>
+      <div class="recipe-meta">Prep: 12m</div>
+      <div class="recipe-footer">
+        <button class="toggle-btn">View Recipe</button>
+        
+      </div>
+    </div>
+    <div class="details">
+      <p><strong>Ingredients:</strong> Canned tuna, cucumber, tomato, onion, yogurt/mayo, lettuce, wrap.</p>
+      <p><strong>Instructions:</strong> Mix ingredients; fill wrap; roll; toast if desired.</p>
+      <p><strong>Health Boost:</strong> High in omega-3 and protein.</p>
+    </div>
+  </div>
+  <!-- Grilled Chicken Salad Bowl -->
+  <div class="recipe-card" data-type="non-veg" data-time="25">
+    <img src="chck salad.jpeg" alt="Grilled Chicken Salad Bowl" class="recipe-image">
+    <div class="recipe-content">
+      <h3 class="recipe-title">🍗 Grilled Chicken Salad Bowl</h3>
+      <div class="recipe-meta">Prep: 25m</div>
+      <div class="recipe-footer">
+        <button class="toggle-btn">View Recipe</button>
+        
+      </div>
+    </div>
+    <div class="details">
+      <p><strong>Ingredients:</strong> Grilled chicken breast, mixed greens, tomatoes, cucumber, onion, olive oil, lemon juice.</p>
+      <p><strong>Instructions:</strong> Grill chicken; toss salad; top chicken.
+      </p>
+      <p><strong>Health Boost:</strong> High-protein, low-carb.</p>
+    </div>
+  </div>
+  <!-- Spicy Tawa Fish Fry -->
+  <div class="recipe-card" data-type="non-veg" data-time="30">
+    <img src="spicy tawa fish.jpg" alt="Spicy Tawa Fish Fry" class="recipe-image">
+    <div class="recipe-content">
+      <h3 class="recipe-title">🐟 Spicy Tawa Fish Fry</h3>
+      <div class="recipe-meta">Prep: 30m</div>
+      <div class="recipe-footer">
+        <button class="toggle-btn">View Recipe</button>
+        
+      </div>
+    </div>
+    <div class="details">
+      <p><strong>Ingredients:</strong> Fish fillet, spices, ginger-garlic paste, lemon juice, minimal oil.</p>
+      <p><strong>Instructions:</strong> Marinate fish; fry until crisp.
+      </p>
+      <p><strong>Health Boost:</strong> Rich in omega-3.</p>
+    </div>
+  </div>
+</main>
+
+<footer>&copy; 2025 HealthyEats. All rights reserved.</footer>
+
+<script>
+  document.querySelectorAll('.btn-toggle').forEach(btn => btn.addEventListener('click', () => {
+    btn.classList.toggle('active');
+  }));
+  document.querySelectorAll('.toggle-btn').forEach(btn => btn.addEventListener('click', () => {
+    const card = btn.closest('.recipe-card');
+    const details = card.querySelector('.details');
+    details.classList.toggle('open');
+    btn.textContent = details.classList.contains('open') ? 'Hide Recipe' : 'View Recipe';
+  }));
+  document.querySelector('.btn-done').addEventListener('click', () => {
+    const activeTypes = [...document.querySelectorAll('.btn-toggle.active')].map(b=>b.dataset.type);
+    const maxTime = document.getElementById('time-select').value;
+    document.querySelectorAll('.recipe-card').forEach(card => {
+      const type = card.dataset.type;
+      const time = parseInt(card.dataset.time,10);
+      const typeMatch = activeTypes.includes(type);
+      const timeMatch = maxTime === 'any' || time <= parseInt(maxTime,10);
+      card.classList.toggle('hide', !(typeMatch && timeMatch));
+    });
+  });
+</script>
+</body>
+</html>
