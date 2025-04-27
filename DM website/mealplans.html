@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Meal Plans – HealthyEats</title>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    :root { --primary:#2F855A; --text:#333; --card-bg:#fff; --border:#eee; }
+    * { box-sizing: border-box; }
+    body { margin:0; font-family:'Open Sans',sans-serif; background:#F7FAFC; color:var(--text); }
+    header { background:#fff; padding:1rem 2rem; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border); position:sticky; top:0; z-index:100; }
+    .logo { font-family:'Poppins',sans-serif; font-size:1.5rem; color:var(--primary); text-decoration:none; }
+    nav ul { display:flex; list-style:none; gap:1rem; margin:0; padding:0; }
+    nav a { text-decoration:none; color:var(--text); font-weight:500; }
+    main { padding:2rem; text-align:center; }
+    .plans-title { font-family:'Poppins',sans-serif; font-size:1.5rem; margin-bottom:1rem; }
+    .category-container { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:1.5rem; margin-bottom:2rem; }
+    .category-card { background:var(--card-bg); border:1px solid var(--border); border-radius:0.5rem; overflow:hidden; cursor:pointer; transition:transform .2s,border-color .2s; }
+    .category-card:hover { border-color:var(--primary); transform:scale(1.02); }
+    .category-image { width:100%; height:150px; object-fit:cover; }
+    .category-label { padding:1rem; font-family:'Poppins',sans-serif; font-size:1.1rem; }
+    .back-btn, #tiers-back-inner { padding:.75rem 1.5rem; background:var(--primary); color:#fff; border:none; border-radius:0.5rem; cursor:pointer; font-size:1rem; transition:background .3s; display:block; margin: 2rem auto 0; }
+    .back-btn:hover, #tiers-back-inner:hover { background:#27694a; }
+    .plans-section { display:none; }
+    .plans-grid { display:grid; grid-template-columns:1fr; gap:1rem; margin-top:1rem; }
+    @media(min-width:600px){ .plans-grid { grid-template-columns:repeat(3,1fr); } }
+    .plan-card { background:var(--card-bg); border:1px solid var(--border); border-radius:0.5rem; display:flex; flex-direction:column; transition:transform .2s; }
+    .plan-card:hover { transform:translateY(-4px); }
+    .plan-header { padding:1rem; background:#E6FFFA; }
+    .plan-name { margin:0; font-family:'Poppins',sans-serif; font-size:1.1rem; }
+    .plan-price { color:var(--primary); font-weight:600; margin-top:.5rem; }
+    .plan-body { padding:1rem; text-align:left; }
+    .plan-body ul { margin:0; padding-left:1.2rem; list-style:disc; }
+    .plan-footer { padding:1rem; text-align:center; }
+    .subscribe-btn { padding:.5rem 1rem; background:var(--primary); color:#fff; border:none; border-radius:0.5rem; cursor:pointer; transition:background .3s; margin:0 .25rem; }
+    .subscribe-btn:hover { background:#27694a; }
+    footer { text-align:center; padding:1rem; color:#888; font-size:.8rem; }
+    /* Modal */
+    #image-modal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); justify-content:center; align-items:center; z-index:1000; overflow:hidden; }
+    #modal-img { max-width:90%; max-height:90%; object-fit:contain; border:4px solid white; border-radius:0.5rem; transform-origin:center center; transition:transform .2s ease; }
+    #modal-controls, #close-modal { position:absolute; z-index:1001; }
+    #close-modal { top:20px; right:30px; font-size:2rem; color:white; cursor:pointer; }
+    #modal-controls { top:20px; left:50%; transform:translateX(-50%); }
+    #modal-controls button { margin:0 0.5rem; padding:0.5rem 1rem; font-size:1.2rem; border:none; border-radius:0.25rem; background:rgba(255,255,255,0.8); cursor:pointer; }
+    #modal-controls button:hover { background:white; }
+  </style>
+</head>
+<body>
+<header>
+  <a href="index.html" class="logo">HealthyEats</a>
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="recipes.html">Recipes</a></li>
+      <li><a href="mealplan.html">Meal Plans</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="cart.html">Cart</a></li>
+    </ul>
+  </nav>
+</header>
+<main>
+  <h2 class="plans-title">Choose Your Plan</h2>
+  <div class="category-container" id="category-container">
+    <div class="category-card" data-category="muscle">
+      <img src="muscle gain.png" alt="Muscle Gain" class="category-image">
+      <div class="category-label">💪 Muscle Gain</div>
+    </div>
+    <div class="category-card" data-category="weight">
+      <img src="weight loss.png" alt="Weight Loss" class="category-image">
+      <div class="category-label">🔥 Weight Loss</div>
+    </div>
+    <div class="category-card" data-category="fit">
+      <img src="fit and healthy.png" alt="Fit & Healthy" class="category-image">
+      <div class="category-label">🌿 Fit & Healthy</div>
+    </div>
+  </div>
+  <button id="initial-back" class="back-btn" onclick="location.href='mealplan.html';">Back</button>
+
+  <div class="plans-section" id="tiers-section">
+    <h2 class="plans-title" id="tiers-title"></h2>
+    <div class="plans-grid" id="tiers-plans"></div>
+    <button id="tiers-back-inner" class="back-btn">Back to Goals</button>
+  </div>
+</main>
+
+<!-- Modal -->
+<div id="image-modal">
+  <div id="modal-controls">
+    <button id="zoom-in">+</button>
+    <button id="zoom-out">-</button>
+  </div>
+  <img id="modal-img" src="" alt="Preview">
+  <span id="close-modal">&times;</span>
+</div>
+
+<footer>&copy; 2025 HealthyEats. All rights reserved.</footer>
+<script>
+  const params = new URLSearchParams(location.search);
+  const selectedType = params.get('type') || 'veg';
+  let currentCategory = null;
+  const data = {
+    veg: {
+      muscle: [
+        {name:'Basic',price:'₹199/week',items:['Beginners lean muscle','Plant proteins & slow carbs','Quick prep'], img:'mvb.jpeg'},
+        {name:'Standard',price:'₹349/week',items:['More protein variety','Protein smoothies','Moderate workouts'], img:'mvs.jpeg'},
+        {name:'Premium',price:'₹499/week',items:['Superfood protein','Intense training','Pre & post meals'], img:'mvp.jpeg'}
+      ],
+      weight: [
+        {name:'Basic',price:'₹179/week',items:['Low-cal meals','Weight management','Home-style combos'], img:'wvb.jpeg'},
+        {name:'Standard',price:'₹329/week',items:['Fiber & protein','Hydration','Fat-loss support'], img:'wvs.jpeg'},
+        {name:'Premium',price:'₹479/week',items:['Low-GI & detox','Active loss plan','Fitness transformation'], img:'wvp.jpeg'}
+      ],
+      fit: [
+        {name:'Basic',price:'₹189/week',items:['Energy & balance','Staples modern twist','Diet cleanup'], img:'fvb.jpeg'},
+        {name:'Standard',price:'₹339/week',items:['Grains & proteins','Wellness maintenance','Nutritious variety'], img:'fvs.jpeg'},
+        {name:'Premium',price:'₹489/week',items:['Seasonal freshness','Busy-life friendly','Natural hydration'], img:'fvp.jpeg'}
+      ]
+    },
+    nonveg: {
+      muscle: [
+        {name:'Basic',price:'₹219/week',items:['Lean meat & grains','Protein kickstart','Easy prep'], img:'mnb.jpeg'},
+        {name:'Standard',price:'₹369/week',items:['Fish, eggs & recovery','Intermediate support','Balanced macros'], img:'mns.jpeg'},
+        {name:'Premium',price:'₹519/week',items:['Protein diversity','Workout meals','Serious goals'], img:'mnp.jpeg'}
+      ],
+      weight: [
+        {name:'Basic',price:'₹199/week',items:['Animal proteins','Quick dinners','Early results'], img:'wnb.jpeg'},
+        {name:'Standard',price:'₹349/week',items:['Burn fat & keep muscle','Egg & fish focus','Balanced movement'], img:'wns.jpeg'},
+        {name:'Premium',price:'₹499/week',items:['Meat & functionals','Healthy drop','Guided regimen'], img:'wnp.jpeg'}
+      ],
+      fit: [
+        {name:'Basic',price:'₹209/week',items:['Light proteins','Homely healthy','Stay active'], img:'fnb.jpeg'},
+        {name:'Standard',price:'₹359/week',items:['Immunity boost','Easy digestion','Busy-friendly'], img:'fns.jpeg'},
+        {name:'Premium',price:'₹519/week',items:['Detox & hydrate','Active lifestyle','Long-term health'], img:'fnp.jpeg'}
+      ]
+    }
+  };
+
+  // Category click
+  document.querySelectorAll('.category-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const cat = card.dataset.category;
+      currentCategory = cat;
+      document.getElementById('category-container').style.display = 'none';
+      document.getElementById('initial-back').style.display = 'none';
+      document.getElementById('tiers-title').textContent = card.querySelector('.category-label').textContent;
+      document.getElementById('tiers-plans').innerHTML = data[selectedType][cat].map(plan => `
+        <div class="plan-card">
+          <div class="plan-header">
+            <h4 class="plan-name">${plan.name}</h4>
+            <div class="plan-price">${plan.price}</div>
+          </div>
+          <div class="plan-body">
+            <ul>${plan.items.map(i => `<li>${i}</li>`).join('')}</ul>
+          </div>
+          <div class="plan-footer">
+            <button class="subscribe-btn open-img-btn" data-img="${plan.img}">View Menu</button>
+            <button class="subscribe-btn add-cart-btn" data-name="${plan.name}" data-price="${plan.price}">Add to Cart</button>
+          </div>
+        </div>
+      `).join('');
+      document.getElementById('tiers-section').style.display = 'block';
+    });
+  });
+
+  // Back to categories
+  document.getElementById('tiers-back-inner').addEventListener('click', () => {
+    document.getElementById('tiers-section').style.display = 'none';
+    document.getElementById('category-container').style.display = 'grid';
+    document.getElementById('initial-back').style.display = 'block';
+  });
+
+  // Cart logic
+  document.body.addEventListener('click', e => {
+    if (e.target.classList.contains('add-cart-btn')) {
+      const name = e.target.dataset.name;
+      const price = e.target.dataset.price;
+      const goal = currentCategory;
+      let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+      cart.push({ type: selectedType, goal, name, price });
+      localStorage.setItem('cart', JSON.stringify(cart));
+      window.location.href = 'cart.html';
+    }
+  });
+
+  // Modal functionality
+  const modal = document.getElementById('image-modal');
+  const modalImg = document.getElementById('modal-img');
+  let currentScale = 1;
+  document.body.addEventListener('click', e => {
+    if (e.target.classList.contains('open-img-btn')) {
+      modalImg.src = e.target.dataset.img;
+      currentScale = 1;
+      modalImg.style.transform = 'scale(1)';
+      modal.style.display = 'flex';
+    }
+  });
+  document.getElementById('zoom-in').addEventListener('click', () => { currentScale += 0.1; modalImg.style.transform = `scale(${currentScale})`; });
+  document.getElementById('zoom-out').addEventListener('click', () => { currentScale = Math.max(0.1, currentScale - 0.1); modalImg.style.transform = `scale(${currentScale})`; });
+  document.getElementById('close-modal').addEventListener('click', () => { modal.style.display = 'none'; });
+  modal.addEventListener('click', e => { if (e.target === modal) modal.style.display = 'none'; });
+</script>
+</body>
+</html>

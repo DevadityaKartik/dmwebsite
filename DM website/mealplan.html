@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MealPlan – HealthyEats</title>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root { --primary:#2F855A; --text:#333; --card-bg:#fff; --border:#eee; }
+    *{box-sizing:border-box;}
+    body{margin:0;font-family:'Open Sans',sans-serif;background:#F7FAFC;color:var(--text);}
+    header{background:#fff;padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;}
+    .logo{font-family:'Poppins',sans-serif;font-size:1.5rem;color:var(--primary);text-decoration:none;}
+    nav ul{display:flex;list-style:none;gap:1rem;margin:0;padding:0;}
+    nav a{text-decoration:none;color:var(--text);font-weight:500;}
+    main{padding:2rem;text-align:center;}
+    .choice-container{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2rem;margin-bottom:2rem;}
+    .choice-card{background:var(--card-bg);border:1px solid var(--border);border-radius:0.5rem;overflow:hidden;cursor:pointer;transition:transform .2s,border-color .2s;}
+    .choice-card[data-choice="veg"].active {
+      border-color: var(--primary);
+      background: rgba(47,133,90,0.1);
+    }
+    .choice-card[data-choice="nonveg"].active {
+      border-color: #E53E3E;
+      background: rgba(229,62,62,0.1);
+    }
+    .choice-image{width:100%;height:180px;object-fit:cover;object-position:center;display:block;}
+    .choice-label { padding: 1rem; font-family: 'Poppins', sans-serif; font-size: 1.25rem; color: var(--primary); transition: background 0.3s, color 0.3s; }
+    .choice-card[data-choice="veg"]:hover .choice-label,
+    .choice-card[data-choice="veg"].active .choice-label { background: var(--primary); color: #fff; border-radius: 0.25rem; }
+    .choice-card[data-choice="nonveg"]:hover .choice-label,
+    .choice-card[data-choice="nonveg"].active .choice-label { background: #E53E3E; color: #fff; border-radius: 0.25rem; }
+    .btn-ok{padding:.75rem 1.5rem;background:var(--primary);color:#fff;border:none;border-radius:0.5rem;cursor:pointer;font-size:1rem;transition:background .3s;margin-bottom:2rem;}
+    .btn-ok:disabled{background:#ccc;cursor:not-allowed;}
+    .btn-back{padding:.75rem 1.5rem;background:var(--primary);color:#fff;border:none;border-radius:0.5rem;cursor:pointer;font-size:1rem;transition:background .3s;margin-top:2rem;display:none;}
+    .btn-ok:hover:not(:disabled), .btn-back:hover{background:#27694a;}
+    .plans-section{display:none;}
+    .plans-title{font-family:'Poppins',sans-serif;font-size:1.5rem;margin-bottom:1rem;}
+    .plans-grid{display:grid;grid-template-columns:1fr;gap:1rem;}
+    @media(min-width:600px){.plans-grid{grid-template-columns:repeat(3,1fr);}}
+    .plan-card{background:var(--card-bg);border:1px solid var(--border);border-radius:0.5rem;display:flex;flex-direction:column;transition:transform .2s;}
+    .plan-card:hover{transform:translateY(-4px);}
+    .plan-header{padding:1rem;background:#E6FFFA;}
+    .plan-name{margin:0;font-family:'Poppins',sans-serif;font-size:1.1rem;}
+    .plan-price{color:var(--primary);font-weight:600;margin-top:.5rem;}
+    .plan-body{padding:1rem;flex:1;text-align:left;}
+    .plan-body ul{margin:0;padding-left:1.2rem;list-style:disc;}
+    .plan-footer{padding:1rem;text-align:center;}
+    .subscribe-btn{padding:.5rem 1rem;background:var(--primary);color:#fff;border:none;border-radius:0.5rem;cursor:pointer;transition:background .3s;}
+    .subscribe-btn:hover{background:#27694a;}
+    footer{text-align:center;padding:1rem;color:#888;font-size:.8rem;}
+  </style>
+</head>
+<body>
+<header>
+  <a href="index.html" class="logo">HealthyEats</a>
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="recipes.html">Recipes</a></li>
+      <li><a href="mealplan.html">Meal Plans</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="cart.html">Cart</a></li>
+    </ul>
+  </nav>
+</header>
+<main>
+  <h2>Select Meal Type</h2>
+  <div class="choice-container">
+    <div class="choice-card" data-choice="veg">
+      <img src="veg main background.jpg" alt="Vegetarian" class="choice-image">
+      <div class="choice-label">Vegetarian</div>
+    </div>
+    <div class="choice-card" data-choice="nonveg">
+      <img src="non veg background.webp" alt="Non-Veg" class="choice-image">
+      <div class="choice-label">Non‑Vegetarian</div>
+    </div>
+  </div>
+  <button class="btn-ok" disabled>OK</button>
+</main>
+<footer>&copy; 2025 HealthyEats. All rights reserved.</footer>
+<script>
+  const choices=document.querySelectorAll('.choice-card');
+  const btnOk=document.querySelector('.btn-ok');
+  let sel;
+  choices.forEach(c=>c.addEventListener('click',()=>{
+    choices.forEach(x=>x.classList.remove('active'));
+    c.classList.add('active'); sel=c.dataset.choice; btnOk.disabled=false;
+  }));
+  btnOk.addEventListener('click',()=>{
+    window.location.href = `mealplans.html?type=${sel}`;
+  });
+</script>
+</body>
+</html>
