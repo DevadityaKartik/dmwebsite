@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HealthyEats – Quick & Healthy Meal Plans</title>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #2F855A;
+      --secondary: #27694a;
+      --text: #333;
+      --bg: #F7FAFC;
+      --card-bg: #FFF;
+      --border: #E6E6E6;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Open Sans', sans-serif; background: var(--bg); color: var(--text); }
+    header { display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; background: #FFF; border-bottom: 1px solid var(--border); position: sticky; top: 0; }
+    .logo { font-family: 'Poppins', sans-serif; font-size: 1.5rem; color: var(--primary); text-decoration: none; }
+    nav ul { list-style: none; display: flex; gap: 1.5rem; }
+    nav a { text-decoration: none; color: var(--text); font-weight: 500; transition: color .2s; }
+    nav a:hover { color: var(--primary); }
+    main { padding: 4rem 2rem; }
+    .hero { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); align-items: center; gap: 2rem; }
+    .hero-text { }
+    .hero-text h1 { font-family: 'Poppins', sans-serif; font-size: 2.5rem; margin-bottom: 1rem; }
+    .hero-text p { font-size: 1.1rem; margin-bottom: 2rem; line-height: 1.6; }
+    .cta-btn { display: inline-block; background: var(--primary); color: #fff; padding: 1rem 2rem; border: none; border-radius: 0.5rem; font-size: 1rem; font-family: 'Poppins', sans-serif; cursor: pointer; text-decoration: none; transition: background .3s, transform .2s; }
+    .cta-btn:hover { background: var(--secondary); transform: translateY(-2px); }
+    .hero-image img { width: 100%; border-radius: 0.5rem; }
+    .why-heading { text-align: center; font-family: 'Poppins', sans-serif; font-size: 1.8rem; margin-top: 4rem; margin-bottom: 1rem; }
+    .benefits { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin-top: 2rem; }
+    .benefit-card { background: var(--card-bg); border: 1px solid var(--border); padding: 2rem; border-radius: 0.5rem; text-align: center; transition: transform .2s, box-shadow .2s; }
+    .benefit-card:hover { transform: translateY(-4px); box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+    .benefit-card h3 { font-family: 'Poppins', sans-serif; margin-bottom: 1rem; }
+    .benefit-card p { font-size: .95rem; line-height: 1.4; }
+    footer { text-align: center; padding: 2rem; color: #888; font-size: .8rem; }
+  </style>
+</head>
+<body>
+<header>
+  <a href="index.html" class="logo">HealthyEats</a>
+  <nav>
+    <ul>
+        <li><a href="index.html">Home</a></li>
+      <li><a href="recipes.html">Recipes</a></li>
+      <li><a href="mealplan.html?type=veg">Meal Plans</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="cart.html">Cart</a></li>
+    </ul>
+  </nav>
+</header>
+<main>
+  <section class="hero">
+    <div class="hero-text">
+      <h1>Quick. Healthy. Delicious.</h1>
+      <p>Get easy, nutritious meal plans tailor-made for busy students and professionals. Save time in the kitchen, eat well, and stay energized all week long.</p>
+      <a href="mealplan.html?type=veg" class="cta-btn">Get Your Free 7‑Day Plan</a>
+    </div>
+    <div class="hero-image">
+      <img src="meal spread 2.png" alt="Healthy meal spread">
+    </div>
+  </section>
+  <h2 class="why-heading">Why HealthyEats?</h2>
+  <section class="benefits">
+    <div class="benefit-card">
+      <h3>Save Time</h3>
+      <p>Pre-planned menus and grocery lists mean fewer decisions and faster prep.</p>
+    </div>
+    <div class="benefit-card">
+      <h3>Eat Healthy</h3>
+      <p>Balanced, nutrient-rich meals that fuel your body for peak performance.</p>
+    </div>
+    <div class="benefit-card">
+      <h3>Stay Energized</h3>
+      <p>Enjoy sustained energy from wholesome ingredients—no midday slumps.</p>
+    </div>
+  </section>
+</main>
+<footer>&copy; 2025 HealthyEats. All rights reserved.</footer>
+</body>
+</html>
